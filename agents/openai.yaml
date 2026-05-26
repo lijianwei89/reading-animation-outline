@@ -1,0 +1,4 @@
+interface:
+  display_name: "阅读动画大纲与美术预览"
+  short_description: "扩写阅读动画大纲并生成3D中国漫画风格素材提示词与预览图"
+  default_prompt: "Use $reading-animation-outline to expand this reading animation outline, append visual prompts, and generate preview images."
