@@ -16,8 +16,9 @@ Always complete these phases in order:
 1. Generate the expanded animation script by following the existing screenplay rules below.
 2. Keep that script content unchanged after it is generated. Do not shorten, rewrite, replace, or merge screenplay passages merely to serve image generation.
 3. Append an `【美术预览 Prompt】` section after the final screenplay paragraph.
-4. Generate preview images from the appended prompts with the specified Python script.
-5. Append an `【预览图】` section listing or displaying successfully generated local image files. If generation fails, report that failure in this final section without modifying the script or prompt appendix.
+4. Save the complete script and prompts (phases 1-3) as a Markdown file in the output folder. Filename format: `<title-slug>.md` (e.g., `narnia-lucy-intro.md`).
+5. Generate preview images from the appended prompts with the specified Python script.
+6. Append an `【预览图】` section listing or displaying successfully generated local image files to both the conversation output and the saved Markdown file. If generation fails, report that failure in this final section without modifying the script or prompt appendix.
 
 ## Workflow
 
@@ -121,6 +122,15 @@ Prompt：3D中国漫画风格，儿童教育动画，电影级质感，……画
 
 When responding in an interface that supports local image rendering, display a successful preview with Markdown image syntax using its absolute local path.
 
+## Markdown File Output
+
+After generating the full script and prompts, save the entire output (screenplay + 美术预览 Prompt + 预览图) as a single Markdown (.md) file:
+
+- Create the output folder if it does not exist (same folder used for preview images).
+- Filename: use a short ASCII slug derived from the animation title, e.g., `narnia-lucy-intro.md`, `mowgli-crisis.md`.
+- The Markdown file contains the complete output exactly as displayed in the conversation, including the `【预览图】` section with image paths (using relative paths to images in the same folder).
+- Use Markdown image syntax `![description](filename.png)` for preview images in the saved file so they render when opened locally.
+
 ## Preview Generation Command
 
 For each prompt, run:
@@ -143,9 +153,10 @@ Keep the script:
 
 - Production-oriented: Every paragraph should describe something visible, audible, or directly useful for animation.
 - Age-appropriate: Use clear emotions, simple motivations, vivid actions, and readable stakes.
+- Grade-appropriate Chinese: All dialogue, narration, and descriptive text must match the language habits of Chinese primary school students (ages 6-12). Use simple vocabulary, short rhythmic sentences, and avoid literary long sentences, rare words, or abstract concepts. Characters should speak like real children or familiar adults — colloquial, with modal particles and emotional tone. Narration should sound like a teacher telling a vivid story in class.
 - Faithful: Do not change the central plot, lesson hook, or ending request.
 - Balanced: Expand thin outlines into multiple moments, but avoid padding with unrelated subplots.
-- Performable: Dialogue should sound natural when voiced aloud.
+- Performable: Dialogue should sound natural when voiced aloud, matching the vocabulary and sentence patterns a Chinese primary school student would use and understand.
 
 For a short 3-5 sentence outline, usually create 3-5 scenes. For a dense outline with multiple parenthetical beats, create enough scenes to separate time shifts and location changes.
 
@@ -201,3 +212,4 @@ Before finalizing, check that:
 - Every main visual asset named in the prompt appendix comes directly from the script.
 - Every preview prompt specifies `3D中国漫画风格` and prohibits visible text, logos, and watermarks.
 - Each successful preview image was generated from its corresponding appended prompt using `gpt-image-2`.
+- The complete output (script + prompts + preview paths) has been saved as a `.md` file in the output folder.
